@@ -102,10 +102,14 @@
   <!-- Custom styles for the task selector and result figures -->
   <style>
     /* Wider header so the title fits on two clean lines */
-    .title-hero .container { max-width: 1200px; }
+    /* .title-hero .container { max-width: 1200px; } */
+    .container.is-max-desktop { max-width: 1200px; }
+
 
     .glam-figure { margin: 1.5rem auto; text-align: center; }
-    .glam-figure img { width: 100%; max-width: 980px; border-radius: 10px; }
+    /* .glam-figure img { width: 100%; max-width: 980px; border-radius: 10px; } */
+    .glam-figure img { width: 100%; max-width: 100%; border-radius: 10px; }
+
     .glam-figure .figure-caption { color: #555; font-size: 0.95rem; margin-top: 0.75rem; }
 
     .task-selector { margin: 1.75rem 0 1.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
@@ -118,11 +122,13 @@
     .task-btn.active { background: #363636; color: #fff; border-color: #363636; }
 
     .task-video-wrapper { text-align: center; }
-    .task-video-wrapper video { width: 100%; max-width: 900px; border-radius: 10px; background: #000; }
+    /* .task-video-wrapper video { width: 100%; max-width: 900px; border-radius: 10px; background: #000; } */
+    .task-video-wrapper video { width: 100%; max-width: 1100px; border-radius: 10px; background: #000; }
+
 
     /* Side-by-side comparison: two separate videos (Ours vs MIP) */
     .compare-pair { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-    .compare-col { flex: 1 1 320px; max-width: 440px; text-align: center; }
+    .compare-col { flex: 1 1 320px; max-width: 520px; text-align: center; }
     .compare-col video { width: 100%; border-radius: 10px; background: #000; }
     .compare-label {
       display: inline-block; margin-bottom: 0.5rem; padding: 0.2rem 0.8rem;
@@ -314,12 +320,12 @@
         <div class="glam-figure">
           <!-- TODO: export Figure 1 (the two-stage pipeline) and save it here -->
           <img src="static/images/method_figure.png" alt="GLAM two-stage pipeline" loading="lazy"/>
-          <p class="figure-caption">
+          <!-- <p class="figure-caption">
             <strong>GLAM-aligned imitation learning pipeline.</strong> Stage&nbsp;1: an IDM and an action encoder over a
             shared latent action are aligned by an asymmetric KL and grounded by shared forward dynamics. Stage&nbsp;2:
             the frozen GLAM relabels every transition with a latent action, supervising a downstream BC policy that
             predicts latent action chunks and decodes them into executable actions.
-          </p>
+          </p> -->
         </div>
 
         <div class="content has-text-justified">
