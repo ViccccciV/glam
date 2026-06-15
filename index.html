@@ -316,14 +316,14 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Method</h2>
-        <div class="content has-text-justified">
+        <!-- <div class="content has-text-justified">
           <p>
             GLAM turns cross-source integration into a representation-learning problem: two actions that drive the
             environment along the same transition should share the same latent action, no matter which embodiment or
             data source they come from. We use the world model's prediction of how actions shape environment transitions
             as the shared, physically grounded supervisory signal.
           </p>
-        </div>
+        </div> -->
 
         <!-- Pipeline figure (Figure 1) -->
         <div class="glam-figure is-wide">
@@ -339,6 +339,11 @@
 
         <div class="content has-text-justified">
           <p>
+            GLAM turns cross-source integration into a representation-learning problem: two actions that drive the
+            environment along the same transition should share the same latent action, no matter which embodiment or
+            data source they come from. We use the world model's prediction of how actions shape environment transitions
+            as the shared, physically grounded supervisory signal.
+            
             <strong>Stage 1 &mdash; Grounded Latent-Action World Model.</strong> We treat actions as latent variables and
             train a pair of coupled generative models. A heterogeneous model uses an inverse dynamics model (IDM) to
             infer latent actions directly from observation transitions, so it works on unlabelled auxiliary data. A
