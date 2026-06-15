@@ -110,6 +110,15 @@
     /* .glam-figure img { width: 100%; max-width: 980px; border-radius: 10px; } */
     .glam-figure img { width: 100%; max-width: 100%; border-radius: 10px; }
 
+    /* Let a figure grow wider than the surrounding text column */
+    .glam-figure.is-wide {
+      width: 100vw;
+      max-width: 1400px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
     .glam-figure .figure-caption { color: #555; font-size: 0.95rem; margin-top: 0.75rem; }
 
     .task-selector { margin: 1.75rem 0 1.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
@@ -317,7 +326,7 @@
         </div>
 
         <!-- Pipeline figure (Figure 1) -->
-        <div class="glam-figure">
+        <div class="glam-figure is-wide">
           <!-- TODO: export Figure 1 (the two-stage pipeline) and save it here -->
           <img src="static/images/method_figure.png" alt="GLAM two-stage pipeline" loading="lazy"/>
           <!-- <p class="figure-caption">
