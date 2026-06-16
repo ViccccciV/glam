@@ -343,7 +343,8 @@
             environment along the same transition should share the same latent action, no matter which embodiment or
             data source they come from. We use the world model's prediction of how actions shape environment transitions
             as the shared, physically grounded supervisory signal.
-            
+          </p>
+          <p>  
             <strong>Stage 1 &mdash; Grounded Latent-Action World Model.</strong> We treat actions as latent variables and
             train a pair of coupled generative models. A heterogeneous model uses an inverse dynamics model (IDM) to
             infer latent actions directly from observation transitions, so it works on unlabelled auxiliary data. A
