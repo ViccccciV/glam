@@ -186,7 +186,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Imitation from Heterogeneous Demonstrations<br>using Grounded Latent&#8209;Action World Models</h1>
+            <h1 class="title is-1 publication-title">Imitation from Heterogeneous Demonstrations<br>using <span style="color:#2563eb">G</span>rounded <span style="color:#d9480f">L</span>atent&#8209;<span style="color:#7048e8">A</span>ction World <span style="color:#e03131">M</span>odels</h1>
             <div class="is-size-5 publication-authors">
               <!-- TODO: Fill in authors and their personal links -->
               <span class="author-block">
@@ -208,9 +208,9 @@
 
             <div class="column has-text-centered">
               <div class="publication-links">
-                <!-- TODO: Update with your arXiv paper ID -->
+                <!-- TODO: replace each href="#" with the real link when available -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                  <a href="#" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
@@ -219,36 +219,33 @@
                 </a>
               </span>
 
-              <!-- TODO: Add your supplementary material PDF or remove this section -->
               <span class="link-block">
-                <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                <a href="#" target="_blank"
                 class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
-                  <i class="fas fa-file-pdf"></i>
+                  <i class="fab fa-github"></i>
                 </span>
-                <span>Supplementary</span>
+                <span>Code</span>
               </a>
             </span>
 
-            <!-- TODO: Replace with your GitHub repository URL -->
             <span class="link-block">
-              <a href="https://github.com/YOUR_REPO_HERE" target="_blank"
+              <a href="#" target="_blank"
               class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
-                <i class="fab fa-github"></i>
+                <i class="ai ai-arxiv"></i>
               </span>
-              <span>Code</span>
+              <span>arXiv</span>
             </a>
           </span>
 
-          <!-- TODO: Update with your arXiv paper ID -->
           <span class="link-block">
-            <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+            <a href="#" target="_blank"
             class="external-link button is-normal is-rounded is-dark">
             <span class="icon">
-              <i class="ai ai-arxiv"></i>
+              <i class="fas fa-video"></i>
             </span>
-            <span>arXiv</span>
+            <span>Video</span>
           </a>
         </span>
       </div>
@@ -316,27 +313,6 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Method</h2>
-        <!-- <div class="content has-text-justified">
-          <p>
-            GLAM turns cross-source integration into a representation-learning problem: two actions that drive the
-            environment along the same transition should share the same latent action, no matter which embodiment or
-            data source they come from. We use the world model's prediction of how actions shape environment transitions
-            as the shared, physically grounded supervisory signal.
-          </p>
-        </div> -->
-
-        <!-- Pipeline figure (Figure 1) -->
-        <div class="glam-figure is-wide">
-          <!-- TODO: export Figure 1 (the two-stage pipeline) and save it here -->
-          <img src="static/images/method_figure.png" alt="GLAM two-stage pipeline" loading="lazy"/>
-          <!-- <p class="figure-caption">
-            <strong>GLAM-aligned imitation learning pipeline.</strong> Stage&nbsp;1: an IDM and an action encoder over a
-            shared latent action are aligned by an asymmetric KL and grounded by shared forward dynamics. Stage&nbsp;2:
-            the frozen GLAM relabels every transition with a latent action, supervising a downstream BC policy that
-            predicts latent action chunks and decodes them into executable actions.
-          </p> -->
-        </div>
-
         <div class="content has-text-justified">
           <p>
             GLAM turns cross-source integration into a representation-learning problem: two actions that drive the
@@ -344,7 +320,16 @@
             data source they come from. We use the world model's prediction of how actions shape environment transitions
             as the shared, physically grounded supervisory signal.
           </p>
-          <p>  
+        </div>
+
+        <!-- Stage 1 figure -->
+        <div class="glam-figure">
+          <!-- TODO: export the Stage 1 (world model) figure and save it here -->
+          <img src="static/images/method_stage1.png" alt="GLAM Stage 1: grounded latent-action world model" loading="lazy"/>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
             <strong>Stage 1 &mdash; Grounded Latent-Action World Model.</strong> We treat actions as latent variables and
             train a pair of coupled generative models. A heterogeneous model uses an inverse dynamics model (IDM) to
             infer latent actions directly from observation transitions, so it works on unlabelled auxiliary data. A
@@ -352,6 +337,15 @@
             latent space in the target robot's action space. An asymmetric KL objective and a shared forward-dynamics
             model bind the two inference pathways into a single, source-invariant, control-aware latent action space.
           </p>
+        </div>
+
+        <!-- Stage 2 figure -->
+        <div class="glam-figure">
+          <!-- TODO: export the Stage 2 (world-model-aligned BC) figure and save it here -->
+          <img src="static/images/method_stage2.png" alt="GLAM Stage 2: world-model-aligned behavioural cloning" loading="lazy"/>
+        </div>
+
+        <div class="content has-text-justified">
           <p>
             <strong>Stage 2 &mdash; World-Model-Aligned Behavioural Cloning.</strong> The frozen GLAM relabels every
             transition &mdash; target and auxiliary alike &mdash; with its latent action. A latent policy is then trained
@@ -388,7 +382,7 @@
     <div class="task-video-wrapper">
       <!-- TODO: add the merged cross-source transfer video (UMI -> Kinova, Kinova -> Kinova, Real -> Sim) -->
       <video autoplay controls muted loop playsinline preload="metadata">
-        <source src="static/videos/cross_source_transfer.mp4" type="video/mp4">
+        <source src="static/videos/cross_transfer.mp4" type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
         Latents from UMI&nbsp;&rarr;&nbsp;Kinova (cross-embodiment), Kinova&nbsp;&rarr;&nbsp;Kinova (in-distribution),
@@ -454,7 +448,7 @@
       <!-- TODO: export Figure 3 (success-rate bar chart) and save it here, or delete this figure -->
       <img src="static/images/main_results.png" alt="Success rate across all tasks" loading="lazy"/>
       <p class="figure-caption">
-        Success rate (%) across three real-robot and two simulated tasks. GLAM(-O) consistently outperforms all
+        Success rate (%) across five manipulation tasks. GLAM(-O) consistently outperforms all
         baselines and is the only approach to solve bimanual stack-three.
       </p>
     </div>
