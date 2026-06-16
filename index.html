@@ -274,7 +274,7 @@
       </div>
       <h2 class="subtitle has-text-centered">
         <strong>GLAM</strong> learns a shared, control-aware latent action space across heterogeneous data sources,
-        turning cheap unlabelled demonstrations into supervision for a target-robot policy.
+        turning cheap unlabelled demonstrations into supervision for a target-robot imitation learning policy.
       </h2>
     </div>
   </div>
@@ -322,9 +322,9 @@
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
           <p>
-            GLAM turns cross-source integration into a representation-learning problem: two actions that drive the
+            GLAM turns cross-source integration into a representation-learning problem: <strong>two actions that drive the
             environment along the same transition should share the same latent action, no matter which embodiment or
-            data source they come from. We use the world model's prediction of how actions shape environment transitions
+            data source they come from</strong>. We use the world model's prediction of how actions shape environment transitions
             as the shared, physically grounded supervisory signal.
           </p>
         </div>
@@ -337,12 +337,11 @@
 
         <div class="content has-text-justified">
           <p>
-            <strong>Stage 1 &mdash; Grounded Latent-Action World Model.</strong> We treat actions as latent variables and
-            train a pair of coupled generative models. A heterogeneous model uses an inverse dynamics model (IDM) to
-            infer latent actions directly from observation transitions, so it works on unlabelled auxiliary data. A
-            target model uses an action encoder to infer latent actions from executable robot actions, anchoring the
-            latent space in the target robot's action space. An asymmetric KL objective and a shared forward-dynamics
-            model bind the two inference pathways into a single, source-invariant, control-aware latent action space.
+            <strong>Stage 1 &mdash; Grounded Latent-Action World Model Pretraining.</strong> We treat actions as latent variables and
+            train a pair of coupled generative models. The upper heterogeneous model uses an inverse dynamics model (IDM) and a shared forward model to
+            infer latent actions directly from observation transitions, so it works on both target and auxiliary transitions, making the IDM space source-invariant. 
+            The lower target model uses an action encoder to maps target robot state-action pairs into latent actions, injecting executable robot-control semantics.
+            The asymmetric posterior alignment connects these two inference pathways into a single, source-invariant, control-aware latent action space.
           </p>
         </div>
 
@@ -354,11 +353,11 @@
 
         <div class="content has-text-justified">
           <p>
-            <strong>Stage 2 &mdash; World-Model-Aligned Behavioural Cloning.</strong> The frozen GLAM relabels every
-            transition &mdash; target and auxiliary alike &mdash; with its latent action. A latent policy is then trained
+            <strong>Stage 2 &mdash; GLAM-Aligned Behavioural Cloning from Heterogeneous Data.</strong> The frozen GLAM relabels every
+            transition &mdash; target and auxiliary &mdash; with its latent action. A latent policy is then trained
             to predict chunks of latent actions from observations, which are decoded back into executable robot actions.
             This lets unlabelled auxiliary data supervise the downstream BC policy on equal footing with target
-            demonstrations, without any large-scale pretraining.
+            demonstrations.
           </p>
         </div>
       </div>
@@ -376,11 +375,10 @@
         <h2 class="title is-3">Cross-Source Transfer through a Shared Latent Action Space</h2>
         <div class="content has-text-justified">
           <p>
-            To test whether GLAM learns a genuinely shared action space, we take an unseen episode from one source,
-            encode each transition with the IDM, decode it with an action decoder trained only on Kinova-sim data, and
-            replay it open-loop. Latents inferred from UMI, Kinova-sim, and Kinova-real episodes all reproduce the
-            original motion on the Kinova arm &mdash; evidence of alignment across embodiment, in-distribution, and
-            sim-to-real settings.
+            To test whether GLAM learns a genuinely shared action space, we encode unseen trajectories from different sources with the same pretrained IDM, 
+            and decode the latent sequence with the same target action decoder. 
+            This decoder has never seen UMI or real-robot actions. Latents inferred from UMI, Kinova-sim, and Kinova-real episodes all reproduce the
+            original motion on the Kinova arm &mdash; evidence of alignment across source, embodiment, and sim-to-real settings.
           </p>
         </div>
       </div>
@@ -409,8 +407,8 @@
         <h2 class="title is-3">Main Results</h2>
         <div class="content has-text-justified">
           <p>
-            GLAM-aligned policies outperform BC and prior latent-action baselines on all five tasks, with the largest
-            gains on the hardest tasks: <strong>+35%</strong> on average across the three real-world tasks,
+            Across five manipulation tasks, GLAM-aligned policies outperform BC and prior latent-action baselines in the same data-scarce setting of 100 demonstrations, 
+            with the largest gains on the hardest tasks: <strong>+35%</strong> on average across the three real-world tasks,
             <strong>+44%</strong> on simulated stack-two, and <strong>+69%</strong> on bimanual stack-three. On
             stack-three &mdash; which typically needs hundreds to a thousand demonstrations &mdash; GLAM is the only
             method to achieve non-trivial success (<strong>72.7%</strong> vs. &le;4% for every baseline).
@@ -472,10 +470,12 @@
         <h2 class="title is-3">Auxiliary Data Substitutes for Target Teleoperation</h2>
         <div class="content has-text-justified">
           <p>
-            Our central claim is that aligned auxiliary data can stand in for expensive target-robot teleoperation. On
-            stack-two, scaling cheap auxiliary UMI data improves success rate just as much as scaling target Kinova data,
-            trajectory-for-trajectory &mdash; while the BC baseline needs roughly <strong>5&times;</strong> more target
-            trajectories to reach the same performance.
+            Our central claim is that aligned auxiliary data can substitute for expensive target-robot teleoperation. On
+            stack-two, scaling cheap auxiliary UMI data yields performance gains comparable to scaling target Kinova data for
+            our GLAM-aligned BC policies, while the BC baseline needs roughly <strong>5&times;</strong> more target
+            trajectories to reach the same performance. This indicates the pretrained GLAM has unified different data sources
+            into a single latent space, enabling auxiliary data to serve as a viable substitute for target data 
+            and improve data-efficiency for the downstream BC.
           </p>
         </div>
 
@@ -484,7 +484,7 @@
           <img src="static/images/scaling.png" alt="Auxiliary data substitutes for target data" loading="lazy"/>
           <p class="figure-caption">
             <strong>Heterogeneous data closes BC's data gap on stack-two.</strong> (a) MIP needs far more target
-            trajectories than GLAM-O to reach the same success rate. (b) For GLAM-O, scaling auxiliary UMI data matches
+            trajectories than GLAM-aligned policies to reach the same success rate. (b) For GLAM-aligned policies, scaling auxiliary UMI data matches
             scaling target Kinova data &mdash; the two curves coincide.
           </p>
         </div>
@@ -569,11 +569,11 @@
   <script>
   (function () {
     var tasks = {
-      lifting:    { ours: 'static/videos/main_lifting_ours.mp4',    mip: 'static/videos/main_lifting_mip.mp4',    caption: 'Lifting — picking up a cube.' },
-      pickplace:  { ours: 'static/videos/main_pickplace_ours.mp4',  mip: 'static/videos/main_pickplace_mip.mp4',  caption: 'Pick & Place — transporting a cube into a bowl.' },
-      knockdown:  { ours: 'static/videos/main_knockdown_ours.mp4',  mip: 'static/videos/main_knockdown_mip.mp4',  caption: 'Knock-down — toppling a mustard bottle, which requires approaching at the correct angle.' },
-      stacktwo:   { ours: 'static/videos/main_stacktwo_ours.mp4',   mip: 'static/videos/main_stacktwo_mip.mp4',   caption: 'Stack-two — single-arm two-cube stacking in simulation.' },
-      stackthree: { ours: 'static/videos/main_stackthree_ours.mp4', mip: 'static/videos/main_stackthree_mip.mp4', caption: 'Stack-three — bimanual three-cube stacking; GLAM is the only method to solve it.' }
+      lifting:    { ours: 'static/videos/main_lifting_ours.mp4',    mip: 'static/videos/main_lifting_mip.mp4',    caption: 'Lifting — picking up a cub under varying positions.' },
+      pickplace:  { ours: 'static/videos/main_pickplace_ours.mp4',  mip: 'static/videos/main_pickplace_mip.mp4',  caption: 'Pick & Place — transporting a cube into a bowl under varying cube and bowl positions.' },
+      knockdown:  { ours: 'static/videos/main_knockdown_ours.mp4',  mip: 'static/videos/main_knockdown_mip.mp4',  caption: 'Knock-down — knocking down a mustard bottle under varying positions, which requires approaching at the correct angle.' },
+      stacktwo:   { ours: 'static/videos/main_stacktwo_ours.mp4',   mip: 'static/videos/main_stacktwo_mip.mp4',   caption: 'Stack-two — single-arm two-cube stacking in simulation; The two cubes are randomly initialized.' },
+      stackthree: { ours: 'static/videos/main_stackthree_ours.mp4', mip: 'static/videos/main_stackthree_mip.mp4', caption: 'Stack-three — bimanual three-cube stacking; The three cubes are randomly initialized.' }
     };
     document.addEventListener('DOMContentLoaded', function () {
       var buttons = document.querySelectorAll('.task-btn');
