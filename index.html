@@ -121,14 +121,16 @@
 
     .glam-figure .figure-caption { color: #555; font-size: 0.95rem; margin-top: 0.75rem; }
 
-    .task-selector { margin: 1.75rem 0 1.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+    .task-selector { margin: 1.75rem 0 1.25rem; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
     .task-btn {
-      border: 1px solid #dbdbdb; background: #fff; color: #363636;
-      padding: 0.5rem 1.15rem; border-radius: 9999px; cursor: pointer;
-      font-weight: 600; font-size: 0.95rem; transition: all 0.15s ease;
+      border: 1px solid rgba(72, 95, 199, 0.35);
+      background: rgba(72, 95, 199, 0.08);
+      color: #2b2f45;
+      padding: 0.7rem 1.6rem; border-radius: 9999px; cursor: pointer;
+      font-weight: 600; font-size: 1.05rem; transition: all 0.15s ease;
     }
-    .task-btn:hover { border-color: #485fc7; color: #485fc7; }
-    .task-btn.active { background: #363636; color: #fff; border-color: #363636; }
+    .task-btn:hover { background: rgba(72, 95, 199, 0.16); border-color: rgba(72, 95, 199, 0.55); color: #485fc7; }
+    .task-btn.active { background: rgba(72, 95, 199, 0.85); color: #fff; border-color: rgba(72, 95, 199, 0.85); }
 
     .task-video-wrapper { text-align: center; }
     /* .task-video-wrapper video { width: 100%; max-width: 900px; border-radius: 10px; background: #000; } */
@@ -210,7 +212,7 @@
               <div class="publication-links">
                 <!-- TODO: replace each href="#" with the real link when available -->
                 <span class="link-block">
-                  <a href="#" target="_blank"
+                  <a href="#"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
@@ -220,7 +222,7 @@
               </span>
 
               <span class="link-block">
-                <a href="#" target="_blank"
+                <a href="#"
                 class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <i class="fab fa-github"></i>
@@ -230,7 +232,7 @@
             </span>
 
             <span class="link-block">
-              <a href="#" target="_blank"
+              <a href="#"
               class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
                 <i class="ai ai-arxiv"></i>
@@ -240,7 +242,7 @@
           </span>
 
           <span class="link-block">
-            <a href="#" target="_blank"
+            <a href="#"
             class="external-link button is-normal is-rounded is-dark">
             <span class="icon">
               <i class="fas fa-video"></i>
