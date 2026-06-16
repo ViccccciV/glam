@@ -204,7 +204,7 @@
 
             <div class="is-size-5 publication-authors">
               <!-- TODO: Fill in your institution -->
-              <!-- <span class="author-block">Institution Name<br>Conference on Robot Learning (CoRL) 2026</span> -->
+              <span class="author-block">University of Oxford<br>Oxford Robotics Institute<br>Applied Artificial Intelligence Lab</span>
               <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
             </div>
 
@@ -264,9 +264,14 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <!-- TODO: Add your teaser/overview video at static/videos/teaser.mp4 -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" playsinline preload="metadata">
+      <!-- <video poster="" id="tree" autoplay controls muted loop height="100%" playsinline preload="metadata">
         <source src="static/videos/teaser.mp4" type="video/mp4">
-      </video>
+      </video> -->
+      <div class="publication-video" style="position:relative;padding-bottom:56.25%;height:0;border-radius:10px;overflow:hidden;">
+        <iframe src="https://www.youtube.com/embed/g4HNNm55X48?rel=0"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+                allow="accelerator;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+      </div>
       <h2 class="subtitle has-text-centered">
         <strong>GLAM</strong> learns a shared, control-aware latent action space across heterogeneous data sources,
         turning cheap unlabelled demonstrations into supervision for a target-robot policy.
